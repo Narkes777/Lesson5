@@ -4,9 +4,10 @@ from .models import Ad
 
 # Create your views here.
 
-def index(request: HttpRequest) -> HttpResponse:
+def index(request: HttpRequest, pk: int) -> HttpResponse:
+    ad = Ad.objects.get(pk=pk)
     template = loader.get_template('index.html')
-    context = {"ads": Ad.objects.all(), "test_var": "TEST"}
+    context = {"ad": ad, "test_var": "TEST"}
     return HttpResponse(template.render(context, request))
 
 
